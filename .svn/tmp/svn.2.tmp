@@ -1,0 +1,103 @@
+var app = angular.module('bcloyalty');
+
+app.controller('searchCtrl',function($http, $scope,  $state, $location, sessionService){
+
+
+	var user = $state.params.userDetails;
+
+
+	$scope.updateDetail ={};
+	/*if($state.params.search){
+        $scope.search = $state.params.search;
+          }*/
+
+	$scope.update = function() {
+		$scope.updateDetail.userId = $scope.userId;
+		$scope.updateData = !$scope.updateData;
+
+
+	};
+
+	var base64file;
+
+	$scope.updateDetail.kycBankName = sessionService.get('bankName');
+	//$scope.updateDetail.kycUpdateDate = new Date();
+	$scope.updateDetail.fileUpload = base64file;
+
+
+	$scope.callUpdate = function(updateDetail){
+
+		const apiBaseURL = 'http://localhost:8080/api/UpdateKycDoc';
+		$http.put(apiBaseURL,updateDetail).then(function(response){
+			console.log('brought back', response);
+			window.alert(response);
+
+		});
+
+	}
+
+	$scope.search = function(){
+		const apiBaseURL = 'http://localhost:8080/api/'+$scope.userId+'/get-kycs-by-userid';
+
+		$http.get(apiBaseURL).then(function (response){
+			if(response == null){
+				$scope.error = "Record not found!!!";
+				$state.go('search', $scope.error);
+			}else{
+				$scope.error=null;
+				console.log('brought back', response);
+				$scope.items = response;
+				
+			}
+		});
+	};
+
+	$scope.check=function(){
+
+		// To get the file
+		var newFile= $(":file")[0].files[0]
+
+
+		// To check whether a file is selected or not and the file is pdf
+		if(newFile &&(newFile.type=='application/pdf')){
+			console.log(newFile)
+			alert("Successful");
+			getBase64(newFile);
+
+
+		}else{
+			alert("Select a pdf file");
+			return false;
+		}
+
+	};
+
+	function getBase64(file) {
+
+
+		var reader = new FileReader();
+		reader.readAsDataURL(file);
+
+		reader.onload = function () {
+			base64file=reader.result;
+
+		};
+		reader.onerror = function (error) {
+
+		};
+	}
+
+	window.downloadPDF = function downloadPDF() {
+
+		var dlnk = document.getElementById('dwnldLnk');
+		dlnk.href = base64file;
+
+		dlnk.click();
+
+
+
+	};
+});
+
+
+

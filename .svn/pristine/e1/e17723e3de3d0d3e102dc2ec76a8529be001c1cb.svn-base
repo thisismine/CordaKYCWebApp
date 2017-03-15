@@ -1,0 +1,90 @@
+
+<div class="clearfix"></div>
+    <form name="myForm" class="form form-horizontal" role="form">
+        <div class="form-group">
+            <div class="col-md-4">
+                <h2><small><b>{{thisNode}}</b></small></h2>
+                
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-md-4">
+                <h1><small><b><i>KYC(know your customer) Form</i></b></small></h1>
+                <div style="color:#C3441D"><h4>{{err}}</h4></div>
+                <div style="color:#218527"><h4>{{succ}}</h4></div>
+            </div>
+        </div>      
+        <div class="form-group" ng-class="{ 'has-error' : myForm.userId.$invalid && !myForm.userId.$pristine }">
+            <div class="col-md-4">
+                <label for="userId"><b>User ID:</b></label>
+            </div>
+            <div class="col-md-4">
+                <!-- <input type="text" ng-model="itemDetail.userID" placeholder="User ID" class="form-control" id="userID" /> -->
+                <input type="text"  name="userId" ng-model="itemDetail.userId" placeholder="User Id" class="form-control" id="userId"  ng-minlength="3" ng-maxlength="10" onkeypress='return event.charCode >= 48 && event.charCode <= 57' required>
+                <p ng-show="myForm.userId.$error.minlength" class="help-block">User ID is too short.</p>
+			    <p ng-show="myForm.userId.$error.maxlength" class="help-block">User ID is too long.</p>
+            </div>
+        </div>
+        <div class="form-group" ng-class="{ 'has-error' : myForm.userName.$invalid && !myForm.userName.$pristine }">
+            <div class="col-md-4">
+                <label for="userName"><b>User Name:</b></label>
+            </div>
+            <div class="col-md-4">
+                <!-- <input type="text" ng-model="itemDetail.userName" placeholder="User Name" class="form-control" id="userName"> -->
+                <input type="text" name="userName" id="userName" class="form-control" ng-model="itemDetail.userName"  placeholder="User Name" ng-minlength="3" ng-maxlength="20" onkeypress='return event.charCode >= 65 && event.charCode <= 122' required>
+                <p ng-show="myForm.userName.$error.minlength" class="help-block">Username is too short.</p>
+			    <p ng-show="myForm.userName.$error.maxlength" class="help-block">Username is too long.</p>
+            </div>              
+        </div>
+        
+        <div class="form-group">
+            <div class="col-md-4">
+                <label for="bankName"><b>Bank Name:</b></label>
+            </div>
+            <div class="col-md-4">
+                <input type="text" ng-model="itemDetail.kycBankName" placeholder="Bank Name" class="form-control" id="bankName" readonly="readonly" required>
+            </div>
+        </div>
+        <!-- <div class="form-group">
+            <div class="col-md-4">
+                <label for="kycDate"><b>KYC date</b></label>
+            </div>
+            <div class="col-md-4">
+                <input type="date" placeholder="YYYY-MM-DD" ng-model="itemDetail.kycCreateDate" class="form-control" id="kycDate" date-format="YYYY-MM-DD" readonly="readonly">
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-md-4">
+                <label for="kYCExpiryDate"><b>KYC Expiry Date</b></label>
+            </div>
+            <div class="col-md-4">
+                <input type="text" placeholder="YYYY-MM-DD" ng-model="itemDetail.kycValidTillDate" class="form-control" id="kYCExpiryDate" date-format="YYYY-MM-DD">
+            </div>
+        </div> -->
+
+        <div class="form-group">
+            <div class="col-md-4">
+                <label><b>KYC IDProof Document</b></label>
+            </div>
+         <div class="form-group">   
+           
+		<div class="col-md-4">
+        	<!-- <input type="file" ng-model="itemDetail.kycDocBlob"  id="kycDocBlob"   valid-file required type="file" class="filestyle" accept="application/pdf" data-buttonName="btn-primary" data-size="nr" data-icon="false"  /><br> -->
+        	<input type="file" ng-model="itemDetail.kycDocBlob"  id="kycDocBlob"   class="filestyle" accept="application/pdf" data-buttonName="btn-primary" data-size="nr" data-icon="false"  /><br>
+			<!-- <input type="button" name="" value="Upload" class="btn btn-primary" ng-click=check() />	 -->		
+		</div>
+		
+        </div>
+        <div class="form-group">
+            <div class="col-md-1">
+                <button type="submit" class="btn btn-primary"  ng-disabled="myForm.$invalid" ng-click="addRow(itemDetail)">Submit</button>
+                <!--  <button ng-click="logout()" class="glyphicon glyphicon glyphicon-off btn btn-primary" aria-hidden="true">Logout</button> -->
+            </div>
+        </div>
+        
+       
+    </form>
+
+
+			
+

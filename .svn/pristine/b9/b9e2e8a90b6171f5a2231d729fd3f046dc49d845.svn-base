@@ -1,0 +1,24 @@
+{"user":[
+	      {
+	        "userID": "101",
+	        "password": "101",
+	        "bankName": "HDFC",
+	        "ip": "127.0.0.1",
+	        "port":"10003"
+	      },
+	      {
+	        "userID": "102",
+	        "password": "102",
+	        "bankName": "SBI",
+	        "ip": "127.0.0.2",
+	        "port":"10004"
+	      },
+	      {
+	        "userID": "103",
+	        "password": "103",
+	        "bankName": "ICICI",
+	        "ip": "127.0.0.3",
+	        "port":"10005"
+	      }  
+      ]   
+}

@@ -1,0 +1,63 @@
+angular.module('bcloyalty').controller('kycmainCtrl', function($scope,  $state, $http, $location) {
+    
+	//var x = location.port;
+	//var ip = location.host;
+    
+    var user = $state.params.userDetails;
+	var string; 
+    $scope.itemDetail ={};
+    $scope.items = [];
+    $scope.itemDetail.kycBankName = user.bankName;
+    $scope.itemDetail.kycCreateDate = new Date(); 
+    
+	$scope.addRow = function(itemDetail){
+		$scope.itemDetail.filePicker = string;
+		alert("dgdfgdf = "+$scope.itemDetail.filePicker);
+	const apiBaseURL = 'http://localhost:8080/api/createKycDoc';
+	$http.put(apiBaseURL,itemDetail).then(function(response){
+		console.log('brought back', response);
+		//console.log(itemDetail.userId);
+		
+		 
+		 });
+	};
+	
+	$scope.check=function(){
+	    // To get the file
+	    var newFile= $(":file")[0].files[0];
+	     
+	
+	    // To check whether a file is selected or not and the file is pdf
+	    if(newFile &&(newFile.type=='application/pdf')){
+	        console.log(newFile)
+	        alert("Successful");
+	        getBase64(newFile);   
+	                  
+	    }else{
+	        alert("Select a pdf file");
+	        return false;
+	    }
+	};
+    function getBase64(file) {
+	    var reader = new FileReader();
+	    reader.readAsDataURL(file);
+	    reader.onload = function () {
+		    base64file=reader.result;
+		    string = base64file;
+	    };
+	    reader.onerror = function (error) {
+	    
+	    };
+    }
+});
+
+/* $scope.items=[];
+    const nodePort = $location.port();
+    const apiBaseURL = 'http://localhost:10003/api/example/';
+    $http.get(apiBaseURL + "me").then(function(response){ $scope.thisNode = response.data.me});
+    $http.get('http://localhost:10003/api/example/abc').then(function(response){$scope.items=response.data});
+*/
+
+
+
+

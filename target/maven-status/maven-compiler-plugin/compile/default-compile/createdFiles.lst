@@ -1,0 +1,4 @@
+com\capgemini\kycapp\app\App.class
+com\capgemini\kycapp\app\KycConfiguration.class
+com\capgemini\kycapp\api\KYCController.class
+com\capgemini\kycapp\model\UserKycInfo.class
